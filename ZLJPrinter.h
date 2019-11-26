@@ -1,22 +1,25 @@
 //
-//  ZLJBlockPrinter.h
+//  ZLJPrinter.h
+//  SMS
 //
-//  Created by ZLJKevin on 2019/7/30.
+//  Created by Mu on 2019/8/1.
 //
-//GitHub:https://github.com/zljkevin/ZLJBlockPrinter
-//文章：http://iosre.com/t/zljblockprinter-block/15231
 
 #import <Foundation/Foundation.h>
+#import <mach-o/dyld.h>
+#import <mach/mach.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLJBlockPrinter : NSObject
+@interface ZLJPrinter : NSObject
 
 + (NSString *)printBlock:(id)aBlock;
++ (NSString *)callStackSymbolsLocateInImages:(NSArray <NSString *>*)images;
 
 @end
 
 NS_ASSUME_NONNULL_END
+
 
 /* block 内存结构
  struct Block_literal_1 {
