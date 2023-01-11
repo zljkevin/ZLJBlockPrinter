@@ -17,6 +17,7 @@
                                            @"GraphicsServices",
                                            @"CoreFoundation",
                                            @"Foundation",
+                                           @"CoreTelephony",
                                            ] mutableCopy];
     
     NSMutableDictionary <NSString *, NSNumber *>*baseAddrDic = [[NSMutableDictionary alloc]init];
@@ -52,7 +53,11 @@
             
             if ([baseAddrDic.allKeys containsObject:symUnits[1]]) {
                 NSInteger symFileAddr = symVMAddr - [baseAddrDic objectForKey:symUnits[1]].integerValue;
-                [retStr appendFormat:@"%@  symFileAddr 0x%lx\n", sym, symFileAddr];
+                if (symFileAddr <= 0) {
+                    [retStr appendFormat:@"%@ = 0x%lx ≈ symFileAddr\n", sym, symUnits.lastObject.integerValue];
+                }else{
+                    [retStr appendFormat:@"%@  symFileAddr 0x%lx\n", sym, symFileAddr];
+                }
             }else{
                 [retStr appendFormat:@"%@\n", sym];
             }
